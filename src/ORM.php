@@ -261,12 +261,7 @@ final class ORM implements ORMInterface
             return $this->repositories[$role];
         }
 
-        $select = null;
-
-        if ($this->schema->define($role, Schema::TABLE) !== null) {
-            $select = new Select($this, $role);
-            $select->constrain($this->getSource($role)->getConstrain());
-        }
+        $select = new Select($this, $role);
 
         return $this->repositories[$role] = $this->factory->repository($this, $this->schema, $role, $select);
     }

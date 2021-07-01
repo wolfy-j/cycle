@@ -20,6 +20,7 @@ use Cycle\ORM\Relation;
 use Cycle\ORM\Schema;
 use Cycle\ORM\Select\Traits\AliasTrait;
 use Cycle\ORM\Select\Traits\ChainTrait;
+use Cycle\ORM\Select\Traits\ConstrainTrait;
 use Spiral\Database\Query\SelectQuery;
 
 /**
@@ -45,6 +46,7 @@ abstract class AbstractLoader implements LoaderInterface
 {
     use ChainTrait;
     use AliasTrait;
+    use ConstrainTrait;
 
     // Loading methods for data loaders.
     public const INLOAD    = 1;
@@ -81,6 +83,7 @@ abstract class AbstractLoader implements LoaderInterface
     {
         $this->orm = $orm;
         $this->target = $target;
+        $this->setConstrain($this->getSource()->getConstrain());
     }
 
     /**
@@ -293,12 +296,6 @@ abstract class AbstractLoader implements LoaderInterface
 
         return $query;
     }
-
-    /**
-     * @param SelectQuery $query
-     * @return SelectQuery
-     */
-    abstract protected function applyConstrain(SelectQuery $query): SelectQuery;
 
     /**
      * Define schema option associated with the entity.

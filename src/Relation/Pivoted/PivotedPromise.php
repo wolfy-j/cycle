@@ -113,7 +113,6 @@ final class PivotedPromise implements PromiseInterface
 
         /** @var ManyToManyLoader $loader */
         $loader = $loader->withContext($loader, [
-            'constrain' => $this->orm->getSource($this->target)->getConstrain(),
             'as'        => $this->target,
             'method'    => JoinableLoader::POSTLOAD
         ]);

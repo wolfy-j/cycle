@@ -79,9 +79,7 @@ class UserPromise extends User implements PromiseInterface
 
             // Fetching from the database
             $select = new Select($this->orm, $this->target);
-            $this->resolved = $select->constrain(
-                $this->orm->getSource($this->target)->getConstrain()
-            )->fetchOne($this->scope);
+            $this->resolved = $select->fetchOne($this->scope);
 
             $this->orm = null;
         }

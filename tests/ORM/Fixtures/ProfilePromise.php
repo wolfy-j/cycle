@@ -69,9 +69,7 @@ class ProfilePromise extends Profile implements PromiseInterface
     {
         if (!is_null($this->orm)) {
             $select = new Select($this->orm, $this->target);
-            $data = $select->constrain(
-                $this->orm->getSource($this->target)->getConstrain()
-            )->where($this->scope)->fetchData();
+            $data = $select->where($this->scope)->fetchData();
 
             $this->orm->getMapper($this->target)->hydrate($this, $data[0]);
 

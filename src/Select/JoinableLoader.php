@@ -16,7 +16,6 @@ use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Parser\AbstractNode;
 use Cycle\ORM\Schema;
 use Cycle\ORM\Select\Traits\ColumnsTrait;
-use Cycle\ORM\Select\Traits\ConstrainTrait;
 use Spiral\Database\Query\SelectQuery;
 use Spiral\Database\StatementInterface;
 
@@ -26,7 +25,6 @@ use Spiral\Database\StatementInterface;
 abstract class JoinableLoader extends AbstractLoader implements JoinableInterface
 {
     use ColumnsTrait;
-    use ConstrainTrait;
 
     /**
      * Default set of relation options. Child implementation might defined their of default options.
@@ -128,8 +126,6 @@ abstract class JoinableLoader extends AbstractLoader implements JoinableInterfac
             } elseif (is_string($loader->options['constrain'])) {
                 $loader->setConstrain($this->orm->getFactory()->make($loader->options['constrain']));
             }
-        } else {
-            $loader->setConstrain($this->getSource()->getConstrain());
         }
 
         if ($loader->isLoaded()) {
